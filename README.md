@@ -1,168 +1,152 @@
-# 📧 Email Spam Classifier
+# Email Spam Classifier
 
-An AI-powered email spam detection system built with Machine Learning and a beautiful web interface.
-
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.0+-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-## ✨ Features
-
-- 🤖 **Machine Learning Classification** - Uses Multinomial Naive Bayes algorithm
-- 🎨 **Beautiful Web Interface** - Modern, responsive UI built with HTML/CSS/JavaScript
-- 📊 **Confidence Scores** - Shows probability percentages for spam/legitimate classification
-- ⚡ **Real-time Detection** - Instant classification results
-- 💾 **Model Persistence** - Save and load trained models
-- 🧹 **Text Preprocessing** - Advanced NLP techniques (stemming, stopword removal, TF-IDF)
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip package manager
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/jaideepj2004/email-spam-classifier.git
-cd email-spam-classifier
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Train the model (first time only):
-```bash
-python spam_classifier.py
-```
-
-4. Run the web application:
-```bash
-python app.py
-```
-
-5. Open your browser and navigate to:
-```
-http://localhost:5000
-```
-
-## 📁 Project Structure
-
-```
-email-spam-classifier/
-│
-├── app.py                          # Flask web application
-├── spam_classifier.py              # ML model training script
-├── requirements.txt                # Python dependencies
-├── spam_classifier_model.pkl       # Trained model (generated)
-│
-├── templates/
-│   └── index.html                  # Main web interface
-│
-└── static/
-    ├── style.css                   # Styling
-    └── script.js                   # Frontend logic
-```
-
-## 🎯 How It Works
-
-1. **Text Preprocessing**: 
-   - Convert to lowercase
-   - Remove special characters and digits
-   - Remove stopwords
-   - Apply stemming
-
-2. **Feature Extraction**:
-   - TF-IDF Vectorization (max 3000 features)
-
-3. **Classification**:
-   - Multinomial Naive Bayes classifier
-   - Returns spam/ham prediction with confidence scores
-
-## 📊 Model Performance
-
-- **Algorithm**: Multinomial Naive Bayes
-- **Accuracy**: ~75% on test set
-- **Features**: TF-IDF with 3000 max features
-- **Preprocessing**: Stemming + Stopword removal
-
-## 🖼️ Screenshots
-
-The web interface provides:
-- Clean, modern design with gradient backgrounds
-- Real-time classification results
-- Confidence visualization with animated bars
-- Quick example buttons for testing
-- Responsive design for mobile devices
-
-## 🛠️ Technologies Used
-
-- **Backend**: Python, Flask, Flask-CORS
-- **ML Libraries**: Scikit-learn, NLTK, Pandas, NumPy
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Icons**: Font Awesome
-
-## 📝 Usage Example
-
-```python
-from spam_classifier import EmailSpamClassifier
-
-# Initialize classifier
-classifier = EmailSpamClassifier()
-
-# Train on your data
-classifier.train(X_train, y_train)
-
-# Make predictions
-predictions = classifier.predict(X_test)
-
-# Evaluate performance
-classifier.evaluate(X_test, y_test)
-
-# Save the model
-classifier.save_model('my_model.pkl')
-```
-
-## 🔮 Future Enhancements
-
-- [ ] Add more sophisticated algorithms (SVM, Random Forest, Deep Learning)
-- [ ] Implement user feedback loop for continuous learning
-- [ ] Add email header analysis
-- [ ] Support for multiple languages
-- [ ] Integration with email clients
-- [ ] Batch email processing
-- [ ] Export classification reports
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👤 Author
-
-**Jaideep Jaiswal**
-- GitHub: [@jaideepj2004](https://github.com/jaideepj2004)
-
-## 🙏 Acknowledgments
-
-- Scikit-learn for the amazing ML library
-- Flask for the lightweight web framework
-- NLTK for natural language processing tools
+An AI-powered email spam detection system built with **Python, Flask, Scikit-learn, and NLTK**. The classifier uses a **Multinomial Naive Bayes** model trained on TF-IDF features to detect spam emails in real-time through a clean web interface.
 
 ---
 
-⭐ If you found this project helpful, please give it a star!
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Model Training](#model-training)
+- [Setup & Running](#setup--running)
+- [API Reference](#api-reference)
+- [How It Works](#how-it-works)
+
+---
+
+## Overview
+
+Paste any email text into the web interface and get an instant prediction: **SPAM** or **HAM**. The underlying model is trained with a TF-IDF bag-of-words representation and a Multinomial Naive Bayes classifier, achieving high accuracy on typical spam detection benchmarks.
+
+---
+
+## Features
+
+- Real-time email classification via web UI
+- Pre-trained model ready to use — no training required
+- Custom dataset generation included in `spam_classifier.py`
+- Full training pipeline: preprocessing → vectorization → model → evaluation → save
+- Model persistence with `pickle`
+- Flask REST API
+
+---
+
+## Tech Stack
+
+| Component | Technology |
+|---|---|
+| Backend | Python, Flask |
+| ML Model | Multinomial Naive Bayes (Scikit-learn) |
+| Text Features | TF-IDF Vectorizer (3000 max features) |
+| NLP Pre-processing | NLTK (stopwords, Porter stemmer) |
+| Frontend | HTML, CSS (templates/ & static/) |
+
+---
+
+## Project Structure
+
+```
+email-spam-classifier/
+├── app.py                        # Flask web application
+├── spam_classifier.py            # EmailSpamClassifier class + training script
+├── spam_classifier_model.pkl     # Pre-trained Naive Bayes model + vectorizer
+├── requirements.txt              # Python dependencies
+├── templates/
+│   └── index.html                # Web UI
+├── static/                       # CSS / JS assets
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Model Training
+
+The `spam_classifier.py` module contains:
+
+### `EmailSpamClassifier` class
+
+| Method | Description |
+|---|---|
+| `preprocess_text(text)` | Lowercase → remove special chars → remove stopwords → Porter stem |
+| `train(X_train, y_train)` | Vectorizes text with TF-IDF, fits Multinomial NB |
+| `predict(X_test)` | Returns `spam` or `ham` predictions |
+| `evaluate(X_test, y_test)` | Prints accuracy, confusion matrix, classification report |
+| `save_model(filepath)` | Saves model + vectorizer to `.pkl` |
+| `load_model(filepath)` | Loads model + vectorizer from `.pkl` |
+
+### Training pipeline
+
+```python
+from spam_classifier import EmailSpamClassifier, create_sample_dataset
+from sklearn.model_selection import train_test_split
+
+df = create_sample_dataset()
+X_train, X_test, y_train, y_test = train_test_split(
+    df['email'], df['label'], test_size=0.2, stratify=df['label']
+)
+clf = EmailSpamClassifier()
+clf.train(X_train, y_train)
+clf.evaluate(X_test, y_test)
+clf.save_model()
+```
+
+---
+
+## Setup & Running
+
+```bash
+git clone https://github.com/jaideepj2004/email-spam-classifier.git
+cd email-spam-classifier
+pip install -r requirements.txt
+python app.py
+```
+
+Open `http://127.0.0.1:5000`.
+
+### `requirements.txt`
+```
+flask
+scikit-learn
+nltk
+```
+
+---
+
+## API Reference
+
+### `GET /`
+Returns the classification interface.
+
+### `POST /predict`
+Classify an email as spam or ham.
+
+**Form body:** `email=<email text>`
+
+**Response:** Renders `index.html` with prediction result.
+
+---
+
+## How It Works
+
+1. User submits email text via the web form.
+2. Flask `POST /predict` receives the text.
+3. The pre-existing `spam_classifier_model.pkl` is loaded (contains model + vectorizer).
+4. Text is pre-processed: lowercase → remove special chars → remove NLTK stopwords → Porter stemming.
+5. TF-IDF vectorizer transforms the clean text.
+6. Multinomial NB predicts `spam` (1) or `ham` (0).
+7. Result is rendered back on the webpage.
+
+---
+
+## Example Predictions
+
+| Email | Result |
+|---|---|
+| "Congratulations! Click here to claim your $1,000,000 prize!" | **SPAM** |
+| "Can we reschedule the meeting to 3pm?" | **HAM** |
+| "FREE Viagra! Order now, no prescription needed!" | **SPAM** |
+| "Please review the attached quarterly report." | **HAM** |
